@@ -1,0 +1,33 @@
+<%- include ("../partials/header.ejs") %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to RateMyPark!</h1>
+            <p>View or Add Parks That You Have Been To!</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/parks/new">Add New Park</a>
+            </p>
+        </div>
+        
+    </header>
+
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        
+        <% parks.forEach((park) => { %>
+            <div class="col-md-3 col-md-6">
+                <div class="thumbnail">
+                    <img src="<%= park.image %>">
+                    <div class="caption">
+                        <h4><%= park.name %></h4>
+                    </div>
+                    <p>
+                        <a href="/parks/<%= park._id %>" class= "btn btn-primary">More Info</a>
+                    </p>
+                </div>             
+            </div>
+        <% }); %>
+
+    </div>
+
+<%- include ("../partials/footer.ejs") %>
