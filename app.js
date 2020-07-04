@@ -50,5 +50,5 @@ app.use("/", indexRoutes);
 app.use("/parks", parkRoutes);
 app.use("/parks/:id/comments", commentRoutes);
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3000;
 app.listen(3000, () => console.log(`RateMyPark local server running on http://localhost:${3000}`));
