@@ -1,24 +1,26 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var passport = require("passport");
-var flash = require("connect-flash");
-var LocalStrategy = require("passport-local");
-var methodOverride = require("method-override");
-var Park = require("./models/park");
-var Comment = require("./models/comment");
-var User = require("./models/user"); 
-var seedDB = require("./seeds");
-var commentRoutes = require("./routes/comments");
-var parkRoutes = require("./routes/parks");
-var indexRoutes = require("./routes/index");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const flash = require("connect-flash");
+const LocalStrategy = require("passport-local");
+const methodOverride = require("method-override");
+const Park = require("./models/park");
+const Comment = require("./models/comment");
+const User = require("./models/user"); 
+const seedDB = require("./seeds");
+const commentRoutes = require("./routes/comments");
+const parkRoutes = require("./routes/parks");
+const indexRoutes = require("./routes/index");
 const { populate } = require("./models/park");
 const { text } = require("body-parser");
 
-mongoose.connect("mongodb://localhost:27017/Rate_My_Park", { useUnifiedTopology: true, useNewUrlParser: true })
+//mongodb://localhost:27017/Rate_My_Park
+mongoose.connect("mongodb+srv://jsahu:letitrip@cluster0.mrv4o.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    { useUnifiedTopology: true, useNewUrlParser: true })
     .then(res => console.log("Connected to DB"))
-    .catch(err => console.log(err))
+    .catch(err => console.log("ERROR:", err.message))
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs"); //makes sure .ejs file is added the name so the file can process correctly
