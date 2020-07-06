@@ -2,6 +2,10 @@ body {
     background-color: #000;
 }
 
+.viewAllParks {
+    margin-top: 8px;
+}
+
 #landing-header {
     z-index: 1;
     position: relative;
@@ -40,23 +44,19 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-    background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+    background-image: url(https://www.claudecormier.com/wordpress/wp-content/uploads/berczy-park-76.jpg);    
 }
 .slideshow li:nth-child(2) { 
-    background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+    background-image: url(https://marsdd.com/wp-content/uploads/2020/04/10-Toronto-green-projects-to-enjoy-when-the-pandemic-is-over.jpg);
     animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-    background-image: url(http://i.imgur.com/emvhOnb.jpg);
+    background-image: url(https://www.smartertravel.com/uploads/2017/10/yoho-national-park-emerald-lake-boats.jpg);
     animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-    background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+    background-image: url(https://s3.amazonaws.com/btoimage/prism-thumbnails/articles/2018816-guild-park.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp);
     animation-delay: 30s; 
-}
-.slideshow li:nth-child(5) { 
-    background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
-    animation-delay: 40s; 
 }
 
 @keyframes imageAnimation { 
