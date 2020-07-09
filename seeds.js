@@ -22,18 +22,11 @@ var parks = [
 ];
 
 function seedDB() {
-    // await Park.deleteMany({});
-    // console.log("removed parks");
-    // await Comment.remove({});
-    // console.log("comments removed");
-    
-
     Park.deleteMany({}, (err) => {
         if (err) {
             console.log(err);
         } 
         console.log("removed parks");
-
         parks.forEach((seed) => {
             Park.create(seed, (err, park) => {
                 if (err) {
@@ -55,13 +48,10 @@ function seedDB() {
                             }
                         }
                     )
-
                 }
             });
         });
     });
-
-    
 }
 
 module.exports = seedDB;

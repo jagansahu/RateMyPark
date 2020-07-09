@@ -30,8 +30,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-//seedDB();
-
 //authentication
 app.use(session({
     secret: "keyboard",
@@ -44,7 +42,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//saves data 'globally' so it can be used in other files easily
+//enables use to access data easily
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
