@@ -1,66 +1,77 @@
 <%- include ("../partials/header.ejs") %>
+
 <div class="container">
-    <div class="row">
+    <div class="row main-park-name">
         <div class="col-md-3">
-            <p class="lead">RateMyPark</p>
-            <div class="list-group ">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
-            </div>
+            <div id="map"></div>
         </div>
         <div class="col-md-9">
-            <div class="thumbnail">
-                <img class="img-responsive" src="<%= park.image %>">
-                <div class="caption-full">
-                    <h4><a href=""><%= park.name %></a></h4>
-                    <p><%= park.description %></p>
-                    <p>
-                        <em>Submitted by: <%= park.author.username %></em>
-                    </p>
+            <div class="card mb-3">
+                <img class="img-responsive park-img" src="<%= park.image %>">
+                <div class="card-body">
+                    <a class="parkname" href=""><%= park.name %></a>
+                    <em class="park-loc" href=""> - <%= park.location %></em>
+                    <em class="float-right" >Submitted by: <%= park.author.username %></em>
+                    <hr>
+                    <p class="card-text"><%= park.description %></p>
                     <% if (currentUser && park.author.id.equals(currentUser._id)) { %>
-                        <a class="btn btn-xs btn-warning" href="/parks/<%= park._id %>/edit">Edit</a>
+                        <a type="button" class="btn btn-warning" href="/parks/<%= park._id %>/edit">Edit</a>
                         <form action="/parks/<%= park._id %>?_method=DELETE" method="POST" class="delete-form">
-                            <button class="btn btn-xs btn-danger">
-                                Delete 
+                            <button type="button" class="btn btn-danger">
+                                Delete
                             </button>
                         </form>
                     <% } %>
-                </div>
+                </div>                
             </div>
-            <div class="well">
-                <div class="text-right">
-                    <a href="/parks/<%= park._id %>/comments/new" class="btn btn-success">Add New Comment</a>
-                </div>
-                <hr>
-                <% park.comments.forEach((comment) => { %>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <strong><%= comment.author.username %></strong>
-                            
-                            <span class="pull-right">10 days ago</span>
-                            <p>
-                                <%= comment.text %>
-                            </p>
-                            <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
-                                <a href="/parks/<%= park._id %>/comments/<%= comment._id %>/edit" class="btn btn-xs btn-warning" >
-                                    Edit
-                                </a>
-                                <form action="/parks/<%= park._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="delete-form">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="Delete">
-                                </form>
-                            <% } %>
-                        </div>
-                        
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right">
+                        <a href="/parks/<%= park._id %>/comments/new" type="button" class="btn btn-success">Add New Comment</a>
                     </div>
-                    
-                <% }); %>
+                    <hr>
+                    <div class="row">
+                        <% park.comments.forEach((comment) => { %>
+                            <div class="col-md-12 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="float-left">
+                                            <p class="card-title"><%= comment.author.username %></p>
+                                            <p class="card-text"><%= comment.text %></p>
+                                        </div>
+                                        <div class="float-right">
+                                            <p>10 days ago</p>
+                                            <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                                <div class="float-right">
+                                                    <a href="/parks/<%= park._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning" >
+                                                        Edit
+                                                    </a>
+                                                    <form action="/parks/<%= park._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="delete-form">
+                                                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                                    </form>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
+<script>
+    mapboxgl.accessToken = "pk.eyJ1IjoiamFnYW5zYWh1IiwiYSI6ImNrY2JhZTJqbDFxcm8yc3FlNmJkb290ZTEifQ.Z7Pzxxn5sQPYwNHDNf65xw";
+    var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 9 // starting zoom
+    });
+</script>
 
 <%- include ("../partials/footer.ejs") %>

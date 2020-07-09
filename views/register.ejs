@@ -1,11 +1,13 @@
 <%- include ("./partials/header.ejs") %>
 
-<h1>Sign up</h1>
-
-<form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <button>Sign up</button>
+<form class="form-signin user-form" action="/register" method="POST">
+    <h1 class="h3 mb-3 font-weight-normal upin">Sign Up</h1>
+    <input type="text" id="inputEmail" class="form-control" name="username" placeholder="username" required autofocus>
+    <input type="password" id="inputPassword" class="form-control pass" name="password" placeholder="password" required>
+    <button class="btn btn-lg btn-primary btn-block submitter" type="submit">Submit</button>
+    <div class="go-back">
+        <a href="/parks">Go Back</a>
+    </div>
 </form>
 
 <%- include ("./partials/footer.ejs") %>

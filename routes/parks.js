@@ -17,14 +17,16 @@ router.get("/", (req, res) => {
 
 //add new parks
 router.post("/", middleware.isLoggedIn, (req, res) => {
+    console.log(req.body);
     var name = req.body.name;
     var image = req.body.image;
+    var location = req.body.location;
     var description = req.body.description;
     var author = {
         id: req.user._id,
         username: req.user.username
     }
-    var newPark = {name: name, image: image, description: description, author: author};
+    var newPark = {name: name, image: image, location: location, description: description, author: author};
     
     Park.create(newPark, (err, newPark) => {
         if (err) {
@@ -48,7 +50,6 @@ router.get("/:id", (req, res) => {
                 req.flash("error", "Park not found");
                 res.redirect("back"); 
             } else {
-
                 res.render("parks/show", {park: foundPark});
             }
         }

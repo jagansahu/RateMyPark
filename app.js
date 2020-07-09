@@ -6,6 +6,7 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
+const session = require("express-session");
 const Park = require("./models/park");
 const Comment = require("./models/comment");
 const User = require("./models/user"); 
@@ -16,9 +17,10 @@ const indexRoutes = require("./routes/index");
 const { populate } = require("./models/park");
 const { text } = require("body-parser");
 
-
-mongoose.connect(process.env.DATABASEURL,
-    { useUnifiedTopology: true, useNewUrlParser: true })
+//connects to DB
+const url = process.env.DATABASEURL || "mongodb://localhost:27017/Rate_My_Park";
+mongoose.connect(url,
+    { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
     .then(res => console.log("Connected to DB"))
     .catch(err => console.log("ERROR:", err.message))
 
@@ -30,8 +32,9 @@ app.use(flash());
 
 //seedDB();
 
-app.use(require("express-session")({
-    secret: "THE SUN WILL STILL RISE TMRW",
+//authentication
+app.use(session({
+    secret: "keyboard",
     resave: false,
     saveUninitialized: false
 }));
@@ -41,6 +44,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//saves data 'globally' so it can be used in other files easily
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
@@ -48,9 +52,10 @@ app.use((req, res, next) => {
     next();
 });
 
+//routes
 app.use("/", indexRoutes);
 app.use("/parks", parkRoutes);
 app.use("/parks/:id/comments", commentRoutes);
 
-var port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`RateMyPark local server running on http://localhost:${3000}`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`RateMyPark local server running on http://localhost:${ port }`));

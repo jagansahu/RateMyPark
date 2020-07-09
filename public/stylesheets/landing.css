@@ -6,6 +6,11 @@ body {
     margin-top: 8px;
 }
 
+#main-title {
+    font-family: Optima;
+    font-size: 70px;
+}
+
 #landing-header {
     z-index: 1;
     position: relative;

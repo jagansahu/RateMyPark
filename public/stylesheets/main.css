@@ -1,3 +1,74 @@
+.tabs {
+    color: gray;
+}
+
+.alerts {
+    margin-top: 17px;
+}
+
+.addins {
+    width: 30%;
+    margin: 25px auto;
+}
+
+#map {
+    height: 35%;
+    width: 85%;
+}
+
+.create {
+    margin-top: 40px;
+}
+
+.upin {
+    padding-bottom: 8px;
+}
+
+
+.btn-com {
+    display: inline;
+    float: right;
+}
+
+.user-form {
+    text-align: center;
+    margin: 150px auto;
+    height: 40%;
+    width: 20%;
+    padding: 15px;
+}
+
+.submitter {
+    margin-top: 20px;
+}
+
+.pass {
+    margin-top: 15px;
+}
+
+.go-back {
+    text-align: left;
+    padding-top: 12px;
+}
+
+.parkname {
+    font-size: 26px;
+}
+
+.jumborate {
+    margin-top: 23px;
+    margin-bottom: 23px;
+    padding-top: 60px;
+    padding-bottom: 25px;
+}
+
+.main-park-name {
+    padding: 20px;
+}
+.main-park {
+    padding: 10px;
+}
+
 .thumbnail img {
     width: 100%;
 }
@@ -13,3 +84,4 @@
 .delete-form {
     display: inline;
 }
+
