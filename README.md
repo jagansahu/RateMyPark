@@ -4,6 +4,7 @@ A Node.js web application in which you can rate other users' parks they may have
 users' parks. However, anyone is free to rate any park registered in the database.
 
 ## Built with
+- Node.js
 - Express
 - Mongoose
 - MongoDB
