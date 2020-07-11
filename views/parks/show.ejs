@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <a class="parkname" href=""><%= park.name %></a>
                     <em class="park-loc" href=""> - <%= park.location %></em>
-                    <em class="float-right" >Submitted by: <%= park.author.username %></em>
+                    <em class="float-right" >Submitted by: <%= park.author.username %> - <%= moment(park.createdAt).fromNow() %></em>
                     <hr>
                     <p class="card-text"><%= park.description %></p>
                     <% if (currentUser && park.author.id.equals(currentUser._id)) { %>
@@ -59,7 +59,7 @@
                                             <p class="card-text"><%= comment.text %></p>
                                         </div>
                                         <div class="float-right">
-                                            <p>10 days ago</p>
+                                            <p><%= moment(comment.createdAt).fromNow() %></p>
                                             <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                                                 <div class="float-right">
                                                     <a href="/parks/<%= park._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning" >

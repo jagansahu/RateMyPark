@@ -21,6 +21,10 @@ var parkSchema = new mongoose.Schema({
             max: 5,
             default: 0,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     location: String,
     longitude: Number,
     latitude: Number,

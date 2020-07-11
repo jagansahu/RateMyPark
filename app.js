@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+app.locals.moment = require('moment');
 const passport = require("passport");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
@@ -10,7 +11,6 @@ const session = require("express-session");
 const Park = require("./models/park");
 const Comment = require("./models/comment");
 const User = require("./models/user"); 
-const seedDB = require("./seeds");
 const { populate } = require("./models/park");
 const { text } = require("body-parser");
 
