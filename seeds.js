@@ -2,7 +2,8 @@ var mongoose = require("mongoose");
 var Park = require("./models/park");
 var Comment = require("./models/comment");
 
-//sample data
+//sample data 
+//file not used in build of web application
 var parks = [
     {
         name: "High Park",

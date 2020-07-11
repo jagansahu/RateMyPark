@@ -5,6 +5,22 @@ var parkSchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String,
+    ratings: [
+        {
+            type: Number,
+            required: "Please provide a rating (1-5).",
+            min: 0,
+            max: 5,
+            default: 0,
+        }
+    ],
+    rating: {
+            type: Number,
+            required: "Please provide a rating (1-5).",
+            min: 0,
+            max: 5,
+            default: 0,
+    },
     location: String,
     longitude: Number,
     latitude: Number,

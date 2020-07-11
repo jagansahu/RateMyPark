@@ -17,15 +17,33 @@
                     <% if (currentUser && park.author.id.equals(currentUser._id)) { %>
                         <a type="button" class="btn btn-warning" href="/parks/<%= park._id %>/edit">Edit</a>
                         <form action="/parks/<%= park._id %>?_method=DELETE" method="POST" class="delete-form">
-                            <button type="button" class="btn btn-danger">
-                                Delete
-                            </button>
+                            <input type="submit" class="btn btn-danger" value="Delete">
                         </form>
                     <% } %>
                 </div>                
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="float-left">
+                        <div class="card-text mb-1"><%= park.name %> Rating (Avg. From All Ratings Submitted By Any User)</div>
+                        <div class="card-text mb-1 group-star"> 
+                        <% for (var i = 0; i < park.rating; i++) { %>
+                            <span class="fas fa-star stars"></span>
+                        <% } %>
+                        <% for (var j = 0; j < 5-i; j++) { %>
+                            <span class="far fa-star stars"></span>
+                        <% } %>
+                            <strong class="ml-1"><%= park.rating %>/5</strong>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <a type="button" class="btn btn-info" href="/parks/<%= park._id %>/rating">Rate this Park</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
                 <div class="card-body">
                     <div class="text-right">
                         <a href="/parks/<%= park._id %>/comments/new" type="button" class="btn btn-success">Add New Comment</a>

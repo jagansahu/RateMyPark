@@ -40,7 +40,7 @@ router.post("/login", passport.authenticate("local",
 
 router.get("/logout", (req, res) => {
     req.logOut();
-    req.flash("success", "You have logged out of your account")
+    req.flash("success", "You have logged out of your account!")
     res.redirect("/parks");
 });
 

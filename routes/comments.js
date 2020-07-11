@@ -4,7 +4,6 @@ var Park = require("../models/park");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
-
 router.get("/new", middleware.isLoggedIn, (req, res) => {
     Park.findById(req.params.id, (err, park) => {
         if (err) {
@@ -70,7 +69,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
         if (err) {
             res.redirect("back");
         } else {
-            req.flash("success", "Comment deleted");
+            req.flash("success", "Comment deleted!");
             res.redirect("/parks/" + req.params.id);
         }
     });

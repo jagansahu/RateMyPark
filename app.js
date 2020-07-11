@@ -11,9 +11,6 @@ const Park = require("./models/park");
 const Comment = require("./models/comment");
 const User = require("./models/user"); 
 const seedDB = require("./seeds");
-const commentRoutes = require("./routes/comments");
-const parkRoutes = require("./routes/parks");
-const indexRoutes = require("./routes/index");
 const { populate } = require("./models/park");
 const { text } = require("body-parser");
 
@@ -51,6 +48,9 @@ app.use((req, res, next) => {
 });
 
 //routes
+const commentRoutes = require("./routes/comments");
+const parkRoutes = require("./routes/parks");
+const indexRoutes = require("./routes/index");
 app.use("/", indexRoutes);
 app.use("/parks", parkRoutes);
 app.use("/parks/:id/comments", commentRoutes);

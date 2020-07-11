@@ -17,16 +17,16 @@ router.get("/", (req, res) => {
 
 //add new parks
 router.post("/", middleware.isLoggedIn, (req, res) => {
-    console.log(req.body);
     var name = req.body.name;
     var image = req.body.image;
     var location = req.body.location;
     var description = req.body.description;
+    var rating = req.body.rating;
     var author = {
         id: req.user._id,
         username: req.user.username
     }
-    var newPark = {name: name, image: image, location: location, description: description, author: author};
+    var newPark = {name: name, image: image, location: location, description: description, rating: rating, author: author};
     
     Park.create(newPark, (err, newPark) => {
         if (err) {
@@ -63,6 +63,7 @@ router.get("/:id/edit", middleware.checkParkOwnership, (req, res) => {
    }); 
 });
 
+
 //update park route
 router.put("/:id", middleware.checkParkOwnership, (req, res) => {
     Park.findByIdAndUpdate(req.params.id, req.body.park, (err, updatedPark) => {
@@ -74,16 +75,49 @@ router.put("/:id", middleware.checkParkOwnership, (req, res) => {
     });
 });
 
-//destroy park route
-router.delete("/:id", middleware.checkParkOwnership, (req, res) => {
-    park.findByIdAndRemove(req.params.id, (err) => {
+//give park new rating route
+router.get("/:id/rating", (req, res) => {
+    Park.findById(req.params.id, (err, foundPark) => {
+        res.render("ratings/new", {park: foundPark});
+    });
+});
+
+//adds rating
+router.put("/:id/rating", (req, res) => {
+    Park.findByIdAndUpdate(req.params.id, req.body.park, (err, updatedPark) => {
         if (err) {
             res.redirect("/parks");
         } else {
+            updatedPark.ratings.push(req.body.park.rating);
+            updatedPark.rating = Math.floor(calculateAvgRating(updatedPark.ratings));
+            updatedPark.save();
+            req.flash("success", "Successfully added rating!");
+            res.redirect("/parks/" + req.params.id);
+        }
+    });
+});
+
+//destroy park route
+router.delete("/:id", middleware.checkParkOwnership, (req, res) => {
+    Park.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.redirect("/parks");
+        } else {
+            req.flash("success", "Park has been deleted!");
             res.redirect("/parks");
         }
     });
 });
 
+let calculateAvgRating = (ratings) => {
+    if (ratings.length == 0) {
+        return 0;
+    }
+    var sum = 0;
+    ratings.forEach((rating) => {
+        sum+=rating;
+    });
+    return sum / ratings.length;
+}
 
 module.exports = router;

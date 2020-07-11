@@ -2,6 +2,11 @@
     color: gray;
 }
 
+.ratings {
+    text-align: center;
+    margin: 200px auto;
+}
+
 .alerts {
     margin-top: 17px;
 }
@@ -9,6 +14,19 @@
 .addins {
     width: 30%;
     margin: 25px auto;
+}
+
+.stars {
+    color: rgb(238, 208, 39);
+}
+
+.span-3 {
+    margin-left: 64px;
+    margin-right: 7px;
+}
+
+.span-4 {
+    margin-left: 52px;
 }
 
 #map {
